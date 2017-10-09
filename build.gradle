@@ -13,7 +13,7 @@ buildscript {
 
 apply plugin: "net.minecraftforge.gradle.forge"
 
-version = "${minecraft_version}-" + getVersion()
+version = "${minecraftVersion}-" + getVersion()
 group = modGroup
 archivesBaseName = modBaseName
 
@@ -21,6 +21,10 @@ minecraft {
     version = project.minecraftVersion + "-" + project.forgeVersion
     runDir = "run"
     mappings = project.mcpVersion
+
+
+    replace "@VERSION@", "${modVersion}"
+    replaceIn "PackMode.java"
 }
 
 repositories {
