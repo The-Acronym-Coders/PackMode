@@ -23,7 +23,7 @@ public class PackModeCommand extends CommandBase {
     @Override
     @Nonnull
     public String getUsage(@Nonnull ICommandSender sender) {
-        return "Changed the Packmode, current accepted packmodes are " +
+        return "/packmode <name> Sets the Packmode. Current valid packmodes are " +
                 Strings.join(PackModeAPI.getInstance().getPackModes(), " , ");
     }
 
@@ -35,12 +35,16 @@ public class PackModeCommand extends CommandBase {
             if (PackModeAPI.getInstance().isValidPackMode(newPackMode)) {
                 PackModeAPI.getInstance().setNextRestartPackMode(newPackMode);
                 sender.sendMessage(new TextComponentString("PackMode is now " + newPackMode + ". Please restart to " +
-                    "enjoy the new PackMode."));
-            } else  {
+                        "enjoy the new PackMode."));
+            } else {
                 throw new CommandException("PackMode " + newPackMode + " is not in the list of valid PackModes.");
             }
+        } else if (args.length == 0){
+            sender.sendMessage(new TextComponentString("Current PackMode is " + PackModeAPI.getInstance().getCurrentPackMode() +
+                ". PackMode next Restart will be " + PackModeAPI.getInstance().getNextRestartPackMode() + ". Valid " +
+                " PackModes are " + Strings.join(PackModeAPI.getInstance().getPackModes(), " , ")));
         } else {
-            throw new CommandException("Incorrect number of parameters requires 1, found " + args.length);
+            throw new CommandException("Incorrect number of parameters requires 0 or 1, found " + args.length);
         }
 
     }

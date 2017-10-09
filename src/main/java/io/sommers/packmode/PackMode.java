@@ -24,7 +24,8 @@ public class PackMode {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        PackModeAPI.createInstance(PMConfig.packMode, Lists.newArrayList(PMConfig.acceptedModes));
+        PMConfig.init(event.getSuggestedConfigurationFile());
+        PackModeAPI.createInstance(PMConfig.getPackMode(), Lists.newArrayList(PMConfig.getAcceptedModes()));
         CraftTweakerAPI.tweaker.getPreprocessorManager().registerPreprocessorAction("packmode", PackModePreprocessor::new);
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -36,6 +37,6 @@ public class PackMode {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPackModeChanged(PackModeChangedEvent event) {
-        PMConfig.packMode = event.getNextRestartPackMode();
+        PMConfig.setPackMode(event.getNextRestartPackMode());
     }
 }
