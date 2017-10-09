@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.preprocessor.PreprocessorActionBase;
 import crafttweaker.runtime.ScriptFile;
+import io.sommers.packmode.api.PackModeAPI;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +22,8 @@ public class PackModePreprocessor extends PreprocessorActionBase {
 
     @Override
     public void executeActionOnFind(ScriptFile scriptFile) {
-        if (!packModes.contains(PMConfig.packMode)){
-            CraftTweakerAPI.logInfo("Ignoring script " + scriptFile + " as current pack mode " + PMConfig.packMode +
+        if (!packModes.contains(PackModeAPI.getInstance().getCurrentPackMode())){
+            CraftTweakerAPI.logInfo("Ignoring script " + scriptFile + " as current pack mode " + PackModeAPI.getInstance().getCurrentPackMode() +
                 " is not in the scripts pack modes " + Arrays.toString(packModes.toArray()));
 
             scriptFile.setParsingBlocked(true);
