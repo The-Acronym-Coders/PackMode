@@ -14,7 +14,7 @@ public class PackModeInfo {
     }
 
     @ZenMethod
-    public boolean matchPackMode(String packmode) {
+    public boolean matchesPackMode(String packmode) {
         return PackModeAPI.getInstance().getCurrentPackMode().equals(packmode);
     }
 
