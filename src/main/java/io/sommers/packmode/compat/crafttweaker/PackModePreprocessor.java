@@ -1,4 +1,4 @@
-package io.sommers.packmode;
+package io.sommers.packmode.compat.crafttweaker;
 
 import com.google.common.collect.Lists;
 import crafttweaker.CraftTweakerAPI;
