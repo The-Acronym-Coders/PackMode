@@ -4,9 +4,12 @@ import com.google.common.collect.Lists;
 import io.sommers.packmode.api.PackModeAPI;
 import io.sommers.packmode.api.PackModeChangedEvent;
 import io.sommers.packmode.compat.CompatHandler;
+import io.sommers.packmode.proxy.CommonProxy;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -24,6 +27,10 @@ public class PackMode {
     public static final String MC_VERSIONS = "[1.12, 1.13)";
 
     public static Logger logger;
+
+    @SidedProxy(clientSide = "io.sommers.packmode.proxy.CommonProxy",
+            serverSide = "ios.sommers.packmode.proxy.ServerProxy")
+    public static CommonProxy<EntityPlayer> proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

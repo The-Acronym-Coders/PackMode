@@ -14,10 +14,11 @@ import java.util.stream.Collectors;
 
 public class CompatHandler {
     private static final List<Compat> compat = Lists.newArrayList();
-    private static final Map<String, Class<? extends Compat>> compatClasses = Maps.newHashMap();
+    private static final Map<String, String> compatClasses = Maps.newHashMap();
 
     static {
-        compatClasses.put("crafttweaker", CraftTweakerCompat.class);
+        compatClasses.put("crafttweaker", "io.sommers.packmode.compat.crafttweaker.CraftTweakerCompat");
+        compatClasses.put("gamestages", "io.sommers.packmode.compat.gamestages.GameStagesCompat");
     }
 
     public static void tryActivate() {
@@ -29,11 +30,15 @@ public class CompatHandler {
                 .collect(Collectors.toList()));
     }
 
-    public static Compat loadCompat(Class<? extends Compat> compatClass) {
+    public static Compat loadCompat(String compatClassString) {
         Compat compatInstance = null;
         try {
-            compatInstance = compatClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            Class compatClass = Class.forName(compatClassString);
+            Object objectInstance = compatClass.newInstance();
+            if (objectInstance instanceof Compat) {
+                compatInstance = (Compat) objectInstance;
+            }
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             PackMode.logger.error(e);
         }
         return compatInstance;
