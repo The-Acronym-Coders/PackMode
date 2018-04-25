@@ -23,7 +23,7 @@ public class PackMode {
     public static final String MOD_ID = "packmode";
     public static final String MOD_NAME = "PackMode";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPENDS = "after:crafttweaker";
+    public static final String DEPENDS = "after:crafttweaker;after:gamestages";
     public static final String MC_VERSIONS = "[1.12, 1.13)";
 
     public static Logger logger;
