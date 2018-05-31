@@ -29,7 +29,7 @@ public class PackMode {
     public static Logger logger;
 
     @SidedProxy(clientSide = "io.sommers.packmode.proxy.CommonProxy",
-            serverSide = "ios.sommers.packmode.proxy.ServerProxy")
+            serverSide = "io.sommers.packmode.proxy.ServerProxy")
     public static CommonProxy<EntityPlayer> proxy;
 
     @EventHandler

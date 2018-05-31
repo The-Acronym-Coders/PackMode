@@ -8,10 +8,8 @@ import io.sommers.packmode.api.PackModeAPI;
 import io.sommers.packmode.api.PackModeChangedEvent;
 import io.sommers.packmode.compat.Compat;
 import joptsimple.internal.Strings;
-import net.darkhax.gamestages.GameStages;
-import net.darkhax.gamestages.capabilities.PlayerDataHandler;
-import net.darkhax.gamestages.capabilities.PlayerDataHandler.IStageData;
-import net.darkhax.gamestages.packet.PacketStage;
+import net.darkhax.gamestages.GameStageHelper;
+import net.darkhax.gamestages.data.IStageData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
@@ -49,42 +47,43 @@ public class GameStagesCompat extends Compat {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void gameStageChangeOnPackMode(PackModeChangedEvent event) {
-        List<EntityPlayer> entityPlayerList = PackMode.proxy.getPlayers();
-        for (EntityPlayer entityPlayer : entityPlayerList) {
-            handleGameStages(entityPlayer, event.getNextRestartPackMode(), true);
-        }
+        PackMode.proxy.getPlayers().parallelStream()
+                .filter(entityPlayer -> entityPlayer instanceof EntityPlayerMP)
+                .map(entityPlayer -> (EntityPlayerMP) entityPlayer)
+                .forEach(entityPlayerMP -> handleGameStages(entityPlayerMP, event.getNextRestartPackMode(), true));
     }
 
     @SubscribeEvent
     public void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        handleGameStages(event.player, PackModeAPI.getInstance().getNextRestartPackMode(), false);
+        if (event.player instanceof EntityPlayerMP) {
+            handleGameStages((EntityPlayerMP) event.player, PackModeAPI.getInstance().getNextRestartPackMode(), false);
+        }
     }
 
-    public void handleGameStages(EntityPlayer entityPlayer, String packMode, boolean sendMessage) {
-        IStageData stageData = PlayerDataHandler.getStageData(entityPlayer);
+    public void handleGameStages(EntityPlayerMP entityPlayer, String packMode, boolean sendMessage) {
+        IStageData stageData = GameStageHelper.getPlayerData(entityPlayer);
         List<String> addedStages = Lists.newArrayList();
         List<String> removedStages = Lists.newArrayList();
         for (Map.Entry<String, String[]> entry : packModeToGameStages.entrySet()) {
             for (String gameStage : entry.getValue()) {
                 if (entry.getKey().equals(packMode)) {
-                    if (!stageData.hasUnlockedStage(gameStage)) {
-                        stageData.unlockStage(gameStage);
+                    if (!stageData.hasStage(gameStage)) {
+                        stageData.addStage(gameStage);
                         addedStages.add(gameStage);
-                        if (entityPlayer instanceof EntityPlayerMP) {
-                            GameStages.NETWORK.sendTo(new PacketStage(gameStage, true), (EntityPlayerMP) entityPlayer);
-                        }
                     }
                 } else {
-                    if (stageData.hasUnlockedStage(gameStage)) {
-                        stageData.lockStage(gameStage);
+                    if (stageData.hasStage(gameStage)) {
+                        stageData.removeStage(gameStage);
                         removedStages.add(gameStage);
-                        if (entityPlayer instanceof EntityPlayerMP) {
-                            GameStages.NETWORK.sendTo(new PacketStage(gameStage, false), (EntityPlayerMP) entityPlayer);
-                        }
                     }
                 }
             }
         }
+
+        if (!addedStages.isEmpty() || !removedStages.isEmpty()) {
+            GameStageHelper.syncPlayer(entityPlayer);
+        }
+
         if (sendMessage) {
             if (!addedStages.isEmpty()) {
                 entityPlayer.sendStatusMessage(new TextComponentString("GameStages added: " + Strings.join(addedStages, ",")), true);
