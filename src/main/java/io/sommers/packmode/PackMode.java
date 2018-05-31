@@ -41,6 +41,10 @@ public class PackMode {
         CompatHandler.tryActivate();
         CompatHandler.preInit();
 
+        if (PMConfig.getConfiguration().hasChanged()) {
+            PMConfig.getConfiguration().save();
+        }
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
