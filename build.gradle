@@ -33,10 +33,18 @@ repositories {
         name 'CraftTweaker'
         url 'http://maven.blamejared.com'
     }
+    maven {
+        name "GameStages"
+        url "https://maven.mcmoddev.com"
+    }
 }
 
 dependencies {
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweakerVersion}"
+    deobfCompile("net.darkhax.gamestages:GameStages-1.12.2:${gameStageVersion}") {
+        exclude module: "crafttweaker"
+    }
+    deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.2:${bookShelfVersion}"
 }
 
 processResources {

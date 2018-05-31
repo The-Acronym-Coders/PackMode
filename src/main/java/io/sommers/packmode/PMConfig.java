@@ -40,4 +40,8 @@ public class PMConfig {
     public static String[] getAcceptedModes() {
         return acceptedModes.getStringList();
     }
+
+    public static Configuration getConfiguration() {
+        return configuration;
+    }
 }
