@@ -23,12 +23,12 @@ public class PackMode {
     public static final String MOD_ID = "packmode";
     public static final String MOD_NAME = "PackMode";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPENDS = "after:crafttweaker;after:gamestages";
-    public static final String MC_VERSIONS = "[1.12, 1.13)";
+    public static final String DEPENDS = "after:crafttweaker;after:gamestages@[2.0.0,)";
+    public static final String MC_VERSIONS = "[1.12.2, 1.13)";
 
     public static Logger logger;
 
-    @SidedProxy(clientSide = "io.sommers.packmode.proxy.CommonProxy",
+    @SidedProxy(clientSide = "io.sommers.packmode.proxy.ClientProxy",
             serverSide = "io.sommers.packmode.proxy.ServerProxy")
     public static CommonProxy<EntityPlayer> proxy;
 
