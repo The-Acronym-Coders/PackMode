@@ -1,0 +1,12 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+issueTrackerURL="https://github.com/The-Acronym-Coders/epos/issues"
+
+[[mods]]
+    modId="packmode"
+    version="${file.jarVersion}"
+    displayName="Pack Mode"
+    authors="SkySom"
+    description='''
+        Allows Pack Makers to provide different combinations of pack modes
+    '''

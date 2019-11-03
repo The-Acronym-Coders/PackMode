@@ -1,17 +1,15 @@
 package com.teamacronymcoders.packmode.api;
 
-import net.minecraftforge.fml.common.eventhandler.Cancelable;
-import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.eventbus.api.Event;
 
-@Cancelable
 public class PackModeChangedEvent extends Event {
-    private final String nextRestartPackMode;
+    private final String newPackMode;
 
-    PackModeChangedEvent(String nextRestartPackMode) {
-        this.nextRestartPackMode = nextRestartPackMode;
+    public PackModeChangedEvent(String newPackMode) {
+        this.newPackMode = newPackMode;
     }
 
-    public String getNextRestartPackMode() {
-        return this.nextRestartPackMode;
+    public String getNewPackMode() {
+        return this.newPackMode;
     }
 }

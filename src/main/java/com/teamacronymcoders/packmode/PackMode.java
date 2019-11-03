@@ -1,60 +1,38 @@
 package com.teamacronymcoders.packmode;
 
-import com.google.common.collect.Lists;
 import com.teamacronymcoders.packmode.api.PackModeAPI;
-import com.teamacronymcoders.packmode.api.PackModeChangedEvent;
 import com.teamacronymcoders.packmode.compat.CompatHandler;
-import com.teamacronymcoders.packmode.proxy.CommonProxy;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.teamacronymcoders.packmode.PackMode.*;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, dependencies = DEPENDS, acceptedMinecraftVersions = MC_VERSIONS)
+@Mod(value = MOD_ID)
 public class PackMode {
     public static final String MOD_ID = "packmode";
-    public static final String MOD_NAME = "PackMode";
-    public static final String VERSION = "@VERSION@";
-    public static final String DEPENDS = "after:crafttweaker;after:gamestages@[2.0.0,)";
-    public static final String MC_VERSIONS = "[1.12.2, 1.13)";
 
-    public static Logger logger;
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
-    @SidedProxy(clientSide = "io.sommers.packmode.proxy.ClientProxy",
-            serverSide = "io.sommers.packmode.proxy.ServerProxy")
-    public static CommonProxy<EntityPlayer> proxy;
+    public PackMode() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PMCommonConfig.initialize());
+    }
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        PMConfig.init(event.getSuggestedConfigurationFile());
-        logger = event.getModLog();
-        PackModeAPI.createInstance(PMConfig.getPackMode(), Lists.newArrayList(PMConfig.getAcceptedModes()));
-
+    private void commonSetup(FMLCommonSetupEvent event) {
+        PackModeAPI.setInstance(new PackModeAPIImpl());
         CompatHandler.tryActivate();
-        CompatHandler.preInit();
-
-        if (PMConfig.getConfiguration().hasChanged()) {
-            PMConfig.getConfiguration().save();
-        }
-
-        MinecraftForge.EVENT_BUS.register(this);
+        CompatHandler.setup();
     }
 
-    @EventHandler
-    public void onServerStarting(FMLServerStartingEvent event) {
-        event.registerServerCommand(new PackModeCommand());
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onPackModeChanged(PackModeChangedEvent event) {
-        PMConfig.setPackMode(event.getNextRestartPackMode());
+    private void onServerStarting(FMLServerStartingEvent event) {
+        event.getCommandDispatcher().register(PackModeCommand.create());
     }
 }
