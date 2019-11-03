@@ -1,69 +1,74 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
         maven {
             name = "forge"
-            url = "https://files.minecraftforge.net/maven"
+            url = "http://files.minecraftforge.net/maven"
         }
     }
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
+        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "3.+", changing: true
     }
 }
 
-apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "net.minecraftforge.gradle"
+apply plugin: "maven"
+apply plugin: "java"
+apply plugin: "idea"
 
-version = "${minecraftVersion}-" + getVersion()
-group = modGroup
-archivesBaseName = modBaseName
-
-minecraft {
-    version = project.minecraftVersion + "-" + project.forgeVersion
-    runDir = "run"
-    mappings = project.mcpVersion
-
-
-    replace "@VERSION@", "${modVersion}"
-    replaceIn "PackMode.java"
-}
+group = "${group}"
+archivesBaseName = "${archive}"
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven {
-        name 'CraftTweaker'
-        url 'http://maven.blamejared.com'
+        name = "forge"
+        url = "http://files.minecraftforge.net/maven"
     }
-    maven {
-        name "GameStages"
-        url "https://maven.mcmoddev.com"
+}
+
+minecraft {
+    mappings channel: "snapshot", version: "${mappings_version}"
+
+    runs {
+        client {
+            workingDirectory project.file("run")
+            source sourceSets.main
+        }
+
+        server {
+            workingDirectory project.file("run")
+            source sourceSets.main
+        }
     }
 }
 
 dependencies {
-    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweakerVersion}"
-    deobfCompile("net.darkhax.gamestages:GameStages-1.12.2:${gameStageVersion}") {
-        exclude module: "crafttweaker"
-    }
-    deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.2:${bookShelfVersion}"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 }
 
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include "mcmod.info"
-
-        expand "version": project.version, "mcversion": project.minecraft.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "mcmod.info"
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "${title}",
+                "Specification-Vendor"    : "${team}",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "${team}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
 }
 
 apply plugin: "maven"
 
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = '4.9'
+}
 
 uploadArchives {
     repositories {
@@ -74,7 +79,7 @@ uploadArchives {
 }
 
 String getVersion() {
-    String version = "${modVersion}"
+    String version = "${mod_version}"
     String branch = project.hasProperty("branch") ? project.branch : ""
 
     if(branch != "") {
