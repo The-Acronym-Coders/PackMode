@@ -1,4 +1,4 @@
-package io.sommers.packmode;
+package com.teamacronymcoders.packmode;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;

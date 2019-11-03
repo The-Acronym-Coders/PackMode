@@ -1,4 +1,4 @@
-package io.sommers.packmode.api;
+package com.teamacronymcoders.packmode.api;
 
 import com.google.common.collect.ImmutableList;
 import joptsimple.internal.Strings;

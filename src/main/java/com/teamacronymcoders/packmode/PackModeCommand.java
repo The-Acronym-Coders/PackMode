@@ -1,7 +1,6 @@
-package io.sommers.packmode;
+package com.teamacronymcoders.packmode;
 
-import com.google.common.collect.Lists;
-import io.sommers.packmode.api.PackModeAPI;
+import com.teamacronymcoders.packmode.api.PackModeAPI;
 import joptsimple.internal.Strings;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -11,7 +10,6 @@ import net.minecraft.util.text.TextComponentString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
 
 public class PackModeCommand extends CommandBase {
     @Override

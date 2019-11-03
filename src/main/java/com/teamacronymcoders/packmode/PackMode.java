@@ -1,10 +1,10 @@
-package io.sommers.packmode;
+package com.teamacronymcoders.packmode;
 
 import com.google.common.collect.Lists;
-import io.sommers.packmode.api.PackModeAPI;
-import io.sommers.packmode.api.PackModeChangedEvent;
-import io.sommers.packmode.compat.CompatHandler;
-import io.sommers.packmode.proxy.CommonProxy;
+import com.teamacronymcoders.packmode.api.PackModeAPI;
+import com.teamacronymcoders.packmode.api.PackModeChangedEvent;
+import com.teamacronymcoders.packmode.compat.CompatHandler;
+import com.teamacronymcoders.packmode.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
 
-import static io.sommers.packmode.PackMode.*;
+import static com.teamacronymcoders.packmode.PackMode.*;
 
 @Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, dependencies = DEPENDS, acceptedMinecraftVersions = MC_VERSIONS)
 public class PackMode {

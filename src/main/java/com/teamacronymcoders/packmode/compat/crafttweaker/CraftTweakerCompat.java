@@ -1,7 +1,7 @@
-package io.sommers.packmode.compat.crafttweaker;
+package com.teamacronymcoders.packmode.compat.crafttweaker;
 
+import com.teamacronymcoders.packmode.compat.Compat;
 import crafttweaker.CraftTweakerAPI;
-import io.sommers.packmode.compat.Compat;
 
 public class CraftTweakerCompat extends Compat {
     @Override

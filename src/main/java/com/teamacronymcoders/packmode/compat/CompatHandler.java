@@ -1,9 +1,8 @@
-package io.sommers.packmode.compat;
+package com.teamacronymcoders.packmode.compat;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import io.sommers.packmode.PackMode;
-import io.sommers.packmode.compat.crafttweaker.CraftTweakerCompat;
+import com.teamacronymcoders.packmode.PackMode;
 import net.minecraftforge.fml.common.Loader;
 
 import java.util.List;

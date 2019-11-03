@@ -1,4 +1,4 @@
-package io.sommers.packmode.proxy;
+package com.teamacronymcoders.packmode.proxy;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;

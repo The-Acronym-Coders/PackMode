@@ -1,4 +1,4 @@
-package io.sommers.packmode.compat;
+package com.teamacronymcoders.packmode.compat;
 
 public abstract class Compat {
     public abstract void preInit();

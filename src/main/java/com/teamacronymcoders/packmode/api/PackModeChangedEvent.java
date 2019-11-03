@@ -1,4 +1,4 @@
-package io.sommers.packmode.api;
+package com.teamacronymcoders.packmode.api;
 
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;

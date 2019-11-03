@@ -1,4 +1,4 @@
-package io.sommers.packmode.proxy;
+package com.teamacronymcoders.packmode.proxy;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.FMLCommonHandler;

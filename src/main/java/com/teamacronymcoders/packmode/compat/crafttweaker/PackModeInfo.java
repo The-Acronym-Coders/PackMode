@@ -1,7 +1,7 @@
-package io.sommers.packmode.compat.crafttweaker;
+package com.teamacronymcoders.packmode.compat.crafttweaker;
 
 import crafttweaker.annotations.ZenRegister;
-import io.sommers.packmode.api.PackModeAPI;
+import com.teamacronymcoders.packmode.api.PackModeAPI;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

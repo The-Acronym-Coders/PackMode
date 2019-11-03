@@ -1,12 +1,12 @@
-package io.sommers.packmode.compat.gamestages;
+package com.teamacronymcoders.packmode.compat.gamestages;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import io.sommers.packmode.PMConfig;
-import io.sommers.packmode.PackMode;
-import io.sommers.packmode.api.PackModeAPI;
-import io.sommers.packmode.api.PackModeChangedEvent;
-import io.sommers.packmode.compat.Compat;
+import com.teamacronymcoders.packmode.compat.Compat;
+import com.teamacronymcoders.packmode.PMConfig;
+import com.teamacronymcoders.packmode.PackMode;
+import com.teamacronymcoders.packmode.api.PackModeAPI;
+import com.teamacronymcoders.packmode.api.PackModeChangedEvent;
 import joptsimple.internal.Strings;
 import net.darkhax.gamestages.GameStageHelper;
 import net.darkhax.gamestages.data.IStageData;

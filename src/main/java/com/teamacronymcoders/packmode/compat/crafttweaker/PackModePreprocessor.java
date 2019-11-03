@@ -1,10 +1,10 @@
-package io.sommers.packmode.compat.crafttweaker;
+package com.teamacronymcoders.packmode.compat.crafttweaker;
 
 import com.google.common.collect.Lists;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.preprocessor.PreprocessorActionBase;
 import crafttweaker.runtime.ScriptFile;
-import io.sommers.packmode.api.PackModeAPI;
+import com.teamacronymcoders.packmode.api.PackModeAPI;
 
 import java.util.Arrays;
 import java.util.List;
