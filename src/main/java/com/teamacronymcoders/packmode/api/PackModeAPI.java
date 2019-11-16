@@ -1,7 +1,5 @@
 package com.teamacronymcoders.packmode.api;
 
-import com.teamacronymcoders.packmode.PackMode;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -29,7 +27,7 @@ public abstract class PackModeAPI {
     }
 
     public boolean includesPackMode(List<String> packModes) {
-        return packModes.stream().anyMatch(this.getPackMode()::equals);
+        return packModes.stream().anyMatch(this.getPackMode()::equalsIgnoreCase);
     }
 
     public abstract void setPackMode(String packMode);
