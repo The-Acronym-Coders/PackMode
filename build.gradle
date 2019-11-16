@@ -28,6 +28,10 @@ repositories {
         name = "forge"
         url = "http://files.minecraftforge.net/maven"
     }
+    maven {
+        name = "CraftTweaker"
+        url = "https://maven.blamejared.com"
+    }
 }
 
 minecraft {
@@ -48,6 +52,7 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compile fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
 }
 
 jar {
