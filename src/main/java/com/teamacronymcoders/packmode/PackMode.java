@@ -3,6 +3,7 @@ package com.teamacronymcoders.packmode;
 import com.teamacronymcoders.packmode.api.PackModeAPI;
 import com.teamacronymcoders.packmode.compat.CompatHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -32,7 +33,7 @@ public class PackMode {
         CompatHandler.setup();
     }
 
-    private void onServerStarting(FMLServerStartingEvent event) {
-        event.getCommandDispatcher().register(PackModeCommand.create());
+    private void onServerStarting(RegisterCommandsEvent event) {
+        event.getDispatcher().register(PackModeCommand.create());
     }
 }

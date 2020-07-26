@@ -1,5 +1,6 @@
 package com.teamacronymcoders.packmode;
 
+import com.google.common.collect.Lists;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -8,9 +9,14 @@ import com.teamacronymcoders.packmode.api.PackModeAPI;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.ISuggestionProvider;
+import net.minecraft.resources.ResourcePackInfo;
+import net.minecraft.resources.ResourcePackList;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+
+import java.util.Collection;
 
 public class PackModeCommand {
     private static final SimpleCommandExceptionType INVALID_PACK_MODE = new SimpleCommandExceptionType(
@@ -34,7 +40,10 @@ public class PackModeCommand {
                                     if (PackModeAPI.getInstance().isValidPackMode(newPackMode)) {
                                         PackModeAPI.getInstance().setPackMode(newPackMode);
                                         sendTranslatedFeedback(context, "changed", newPackMode);
-                                        context.getSource().getServer().reload();
+                                        MinecraftServer server = context.getSource().getServer();
+                                        ResourcePackList<ResourcePackInfo> resourcePackList = server.getResourcePacks();
+                                        resourcePackList.reloadPacksFromFinders();
+                                        server.func_240780_a_(resourcePackList.func_232621_d_());
                                         return 1;
                                     } else {
                                         throw INVALID_PACK_MODE.create();
