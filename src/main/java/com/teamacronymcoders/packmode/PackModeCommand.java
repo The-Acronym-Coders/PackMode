@@ -41,7 +41,7 @@ public class PackModeCommand {
                                         PackModeAPI.getInstance().setPackMode(newPackMode);
                                         sendTranslatedFeedback(context, "changed", newPackMode);
                                         MinecraftServer server = context.getSource().getServer();
-                                        ResourcePackList<ResourcePackInfo> resourcePackList = server.getResourcePacks();
+                                        ResourcePackList resourcePackList = server.getResourcePacks();
                                         resourcePackList.reloadPacksFromFinders();
                                         server.func_240780_a_(resourcePackList.func_232621_d_());
                                         return 1;
