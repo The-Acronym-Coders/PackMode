@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="MIT License"
+issueTrackerURL="https://github.com/The-Acronym-Coders/PackMode/issues"
+[[mods]]
+modId="packmode"
+version="${file.jarVersion}"
+displayName="PackMode"
+authors="SkySom"
+logo="packmode/logo.png"
+description='''
+        Allows Pack Makers to provide different combinations of pack modes
+'''
+[[dependencies.packmode]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40.1,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.packmode]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
