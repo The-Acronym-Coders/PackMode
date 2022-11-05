@@ -44,6 +44,7 @@ public class CompatHandler {
             if (objectInstance instanceof Compat) {
                 compatInstance = (Compat) objectInstance;
             }
+            else throw new IllegalArgumentException("Class " + compatClass + " does not implement Compat!");
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             PackModeConstants.LOGGER.error(e);
         }
@@ -51,6 +52,10 @@ public class CompatHandler {
     }
 
     public static void setup() {
-        compat.forEach(Compat::setup);
+        compat.forEach(compatModule -> {
+           compatModule.setup();
+           PackModeConstants.LOGGER.info("Setting up Compat Module with class: " + compatModule.getClass().getSimpleName());
+        });
+
     }
 }
