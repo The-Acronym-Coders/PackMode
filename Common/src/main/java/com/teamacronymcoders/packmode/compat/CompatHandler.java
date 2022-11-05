@@ -15,10 +15,6 @@ public class CompatHandler {
     private static final List<Compat> compat = Lists.newArrayList();
     private static final Map<String, String> compatClasses = Maps.newHashMap();
 
-    static {
-        compatClasses.put("minecraft", "com.teamacronymcoders.packmode.compat.minecraft.MineCraftCompat");
-    }
-
     public static void tryActivate() {
         compat.addAll(compatClasses.entrySet().stream()
                 .filter(entry -> PackModeServices.PLATFORM.isModLoaded(entry.getKey()))

@@ -26,9 +26,9 @@ public class PackMode {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         PackModeAPI.setInstance(new PackModeAPIImpl());
+        CompatHandler.registerCompat("minecraft", "com.teamacronymcoders.packmode.condition.minecraft.MinecraftCompat");
         CompatHandler.tryActivate();
         CompatHandler.setup();
-
 
     }
 
