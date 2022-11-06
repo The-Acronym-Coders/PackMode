@@ -1,4 +1,4 @@
-package com.teamacronymcoders;
+package com.teamacronymcoders.packmode;
 
 import net.minecraftforge.eventbus.api.Event;
 

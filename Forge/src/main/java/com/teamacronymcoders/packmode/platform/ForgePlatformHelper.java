@@ -1,6 +1,6 @@
 package com.teamacronymcoders.packmode.platform;
 
-import com.teamacronymcoders.PackModeChangedEvent;
+import com.teamacronymcoders.packmode.PackModeChangedEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
