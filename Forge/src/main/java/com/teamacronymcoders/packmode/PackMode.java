@@ -1,4 +1,4 @@
-package com.teamacronymcoders;
+package com.teamacronymcoders.packmode;
 
 import com.teamacronymcoders.packmode.PackModeAPIImpl;
 import com.teamacronymcoders.packmode.PackModeCommand;
