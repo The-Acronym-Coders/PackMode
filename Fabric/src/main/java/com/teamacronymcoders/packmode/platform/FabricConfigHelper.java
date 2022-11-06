@@ -1,5 +1,6 @@
 package com.teamacronymcoders.packmode.platform;
 
+import com.teamacronymcoders.packmode.PackModeConstants;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.Util;
 
@@ -37,6 +38,7 @@ public class FabricConfigHelper extends MidnightConfig implements ConfigHelper {
     @Override
     public void setPackMode(String packMode) {
         FabricConfigHelper.packMode = packMode;
+        write(PackModeConstants.MODID);
     }
 
     @Override
