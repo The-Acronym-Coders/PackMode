@@ -24,7 +24,7 @@ public class PackModeCommand {
         SharedSuggestionProvider.suggest(PackModeAPI.getInstance().getValidPackModes(), suggestionsBuilder);
 
     public static LiteralArgumentBuilder<CommandSourceStack> create() {
-        return Commands.literal("packmode")
+        return Commands.literal("packmode").requires(source -> source.hasPermission(2))
                 .then(Commands.literal("set")
                         .then(Commands.argument("packmode", StringArgumentType.word())
                                 .suggests(SUGGEST_PACKMODE)
@@ -63,11 +63,10 @@ public class PackModeCommand {
     }
 
     private static void sendTranslatedFeedback(CommandContext<CommandSourceStack> context, String name, String data) {
-        TextComponent component = data == null ? null : new TextComponent(data);
         sendFeedback(context, new TranslatableComponent("packmode.command." + name, data));
     }
 
     private static void sendFeedback(CommandContext<CommandSourceStack> context, Component component) {
-        context.getSource().sendSuccess(component, false);
+        context.getSource().sendSuccess(component, true);
     }
 }

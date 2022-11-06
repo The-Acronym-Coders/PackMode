@@ -17,7 +17,7 @@ public class MinecraftCompat extends Compat {
 
     @Override
     public void setup() {
-
+        //Setup is called later than we'd like, so EBS it is
     }
 
     @SubscribeEvent
