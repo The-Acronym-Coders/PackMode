@@ -98,8 +98,15 @@ tasks.withType(JavaCompile) {
     source(project(":Common").sourceSets.main.allSource)
 }
 
+//Use for testing datagen for packmode recipe conditions
+//Run datagen and uncomment + build to test Forge Recipe Conditions
+//sourceSets.main.resources.srcDir 'src/generated/resources'
+
+//You'll have to change MinecraftCompat to work with an EBS as FMLCommonSetup does NOT fire during datagen!
+
 processResources {
     from project(":Common").sourceSets.main.resources
+
 }
 
 jar.finalizedBy('reobfJar')
