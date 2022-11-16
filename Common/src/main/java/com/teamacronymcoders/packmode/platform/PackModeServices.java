@@ -1,6 +1,6 @@
 package com.teamacronymcoders.packmode.platform;
 
-import com.blamejared.crafttweaker.CraftTweakerCommon;
+import com.teamacronymcoders.packmode.PackModeConstants;
 
 import java.util.ServiceLoader;
 
@@ -14,7 +14,7 @@ public class PackModeServices {
         final T loadedService = ServiceLoader.load(clazz)
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
-        CraftTweakerCommon.LOG.debug("Loaded {} for service {}", loadedService, clazz);
+        PackModeConstants.LOGGER.debug("Loaded {} for service {}", loadedService, clazz);
         return loadedService;
     }
 }
