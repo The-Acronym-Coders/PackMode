@@ -54,7 +54,7 @@ public class CompatHandler {
     public static void setup() {
         compat.forEach(compatModule -> {
            compatModule.setup();
-           PackModeConstants.LOGGER.info("Setting up Compat Module with class: " + compatModule.getClass().getSimpleName());
+           PackModeConstants.LOGGER.info("Setting up PackMode Compat Module with class: " + compatModule.getClass().getName());
         });
 
     }
