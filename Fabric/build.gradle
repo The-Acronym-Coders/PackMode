@@ -10,7 +10,14 @@ repositories {
         url = "https://api.modrinth.com/maven"
     }
     maven {
-        url = "https://maven.terraformersmc.com"
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
     }
 }
 
@@ -21,11 +28,13 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":Common")
+
     modImplementation "com.blamejared.crafttweaker:CraftTweaker-fabric-${minecraft_version}:${crafttweaker_version}"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     modImplementation "maven.modrinth:midnightlib:0.4.4"
     include "maven.modrinth:midnightlib:0.4.4"
-    modRuntimeOnly("com.terraformersmc:modmenu:1.16.6")
+
+    modRuntimeOnly("mezz.jei:jei-1.18.2-fabric:10.2.1.283")
 }
 
 loom {
