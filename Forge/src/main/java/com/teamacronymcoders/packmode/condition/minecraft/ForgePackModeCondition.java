@@ -1,5 +1,6 @@
 package com.teamacronymcoders.packmode.condition.minecraft;
 
+import com.teamacronymcoders.packmode.api.PackModeAPI;
 import com.teamacronymcoders.packmode.compat.minecraft.PackModeCondition;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 
@@ -9,6 +10,11 @@ public class ForgePackModeCondition extends PackModeCondition implements ICondit
 
     public ForgePackModeCondition(List<String> validPackModes) {
         super(validPackModes);
+    }
+
+    //Call on forge
+    public boolean test(IContext context) {
+        return PackModeAPI.getInstance().includesPackMode(this.getValidPackModes());
     }
 
 }

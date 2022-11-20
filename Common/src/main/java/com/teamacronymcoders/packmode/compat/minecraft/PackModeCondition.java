@@ -53,11 +53,6 @@ public abstract class PackModeCondition {
         return true;
     }
 
-    //Call on forge
-    public boolean test() {
-        return PackModeAPI.getInstance().includesPackMode(validPackModes);
-    }
-
     public List<String> getValidPackModes() {
         return this.validPackModes;
     }
