@@ -1,7 +1,9 @@
 package com.teamacronymcoders.packmode.platform;
 
 import com.teamacronymcoders.packmode.PackModeChangedEvent;
+import com.teamacronymcoders.packmode.condition.minecraft.PackModeConditionSerializer;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
@@ -24,5 +26,10 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public void publishEvent(String newPackMode) {
         MinecraftForge.EVENT_BUS.post(new PackModeChangedEvent(newPackMode));
+    }
+
+    @Override
+    public void setupJsonConditions() {
+        CraftingHelper.register(new PackModeConditionSerializer());
     }
 }
