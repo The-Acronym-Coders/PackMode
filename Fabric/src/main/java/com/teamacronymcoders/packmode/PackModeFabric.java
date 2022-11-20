@@ -14,7 +14,7 @@ public class PackModeFabric implements ModInitializer {
     public void onInitialize() {
         MidnightConfig.init(PackModeConstants.MODID, FabricConfigHelper.class);
         PackModeAPI.setInstance(new PackModeAPIImpl());
-        CompatHandler.registerCompat("minecraft", MinecraftCompat.class.getName());
+        CompatHandler.registerCompat("minecraft", MinecraftCompat.class);
         CompatHandler.tryActivate();
         CompatHandler.setup();
 

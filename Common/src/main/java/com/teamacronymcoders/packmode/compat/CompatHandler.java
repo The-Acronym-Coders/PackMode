@@ -36,6 +36,10 @@ public class CompatHandler {
         compatClasses.put(modid, className);
     }
 
+    public static void registerCompat(final String modid, final Class<? extends Compat> clazz) {
+        registerCompat(modid, clazz.getName());
+    }
+
     public static Compat loadCompat(String compatClassString) {
         Compat compatInstance = null;
         try {
