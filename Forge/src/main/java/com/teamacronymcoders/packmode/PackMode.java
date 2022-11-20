@@ -38,7 +38,7 @@ public class PackMode {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         PackModeAPI.setInstance(new PackModeAPIImpl());
-        CompatHandler.registerCompat("minecraft", MinecraftCompat.class.getName());
+        CompatHandler.registerCompat("minecraft", MinecraftCompat.class);
         CompatHandler.tryActivate();
         CompatHandler.setup();
     }
