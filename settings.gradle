@@ -12,5 +12,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'Packmode-1.18-MultiLoader'
+rootProject.name = 'Packmode-1.19-MultiLoader'
 include("Common", "Fabric", "Forge")

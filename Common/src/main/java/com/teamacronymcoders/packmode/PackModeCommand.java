@@ -10,8 +10,6 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackRepository;
@@ -19,7 +17,7 @@ import net.minecraft.server.packs.repository.PackRepository;
 
 public class PackModeCommand {
     private static final SimpleCommandExceptionType INVALID_PACK_MODE = new SimpleCommandExceptionType(
-            new TranslatableComponent("packmode.command.invalid"));
+             Component.translatable("packmode.command.invalid"));
     public static final SuggestionProvider<CommandSourceStack> SUGGEST_PACKMODE = (commandSource, suggestionsBuilder) ->
         SharedSuggestionProvider.suggest(PackModeAPI.getInstance().getValidPackModes(), suggestionsBuilder);
 
@@ -55,7 +53,7 @@ public class PackModeCommand {
                     .executes(context -> {
                         sendTranslatedFeedback(context, "list", null);
                         for(String packMode: PackModeAPI.getInstance().getValidPackModes()) {
-                            sendFeedback(context, new TextComponent("  " + packMode));
+                            sendFeedback(context, Component.literal("  " + packMode));
                         }
                         return 1;
                     })
@@ -63,7 +61,7 @@ public class PackModeCommand {
     }
 
     private static void sendTranslatedFeedback(CommandContext<CommandSourceStack> context, String name, String data) {
-        sendFeedback(context, new TranslatableComponent("packmode.command." + name, data));
+        sendFeedback(context, Component.translatable("packmode.command." + name, data));
     }
 
     private static void sendFeedback(CommandContext<CommandSourceStack> context, Component component) {

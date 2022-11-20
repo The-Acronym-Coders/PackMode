@@ -31,10 +31,10 @@ dependencies {
 
     modImplementation "com.blamejared.crafttweaker:CraftTweaker-fabric-${minecraft_version}:${crafttweaker_version}"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-    modImplementation "maven.modrinth:midnightlib:0.4.4"
-    include "maven.modrinth:midnightlib:0.4.4"
+    modImplementation "maven.modrinth:midnightlib:${midnight_lib_version}"
+    include "maven.modrinth:midnightlib:${midnight_lib_version}"
 
-    modRuntimeOnly("mezz.jei:jei-1.18.2-fabric:10.2.1.283")
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 }
 
 loom {
@@ -49,7 +49,7 @@ loom {
             server()
             setConfigName("Fabric Server")
             ideConfigGenerated(true)
-            runDir("run")
+            runDir("runServer")
         }
     }
 }

@@ -6,7 +6,7 @@ import com.teamacronymcoders.packmode.compat.minecraft.MinecraftCompat;
 import com.teamacronymcoders.packmode.platform.FabricConfigHelper;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 public class PackModeFabric implements ModInitializer {
 
@@ -18,7 +18,7 @@ public class PackModeFabric implements ModInitializer {
         CompatHandler.tryActivate();
         CompatHandler.setup();
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, environment) -> dispatcher.register(PackModeCommand.create()));
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(PackModeCommand.create()));
 
     }
 
