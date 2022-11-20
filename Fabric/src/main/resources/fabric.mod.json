@@ -21,12 +21,11 @@
     "mixins": [
       "packmode.mixins.json"
     ],
-    "suggests" : "crafttweaker",
     "depends": {
       "fabricloader": ">=0.13",
       "minecraft": "1.18.x",
       "java": ">=17",
-      "fabric" : ">=0.48.0+1.18.2"
+      "fabric" : "*"
     }
   }
   
