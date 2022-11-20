@@ -1,7 +1,9 @@
 package com.teamacronymcoders.packmode.platform;
 
+import com.teamacronymcoders.packmode.compat.minecraft.PackModeCondition;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatformHelper implements PlatformHelper {
@@ -35,5 +37,10 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     private interface DummyInterface<U> {
         void handle(U u);
+    }
+
+    @Override
+    public void setupJsonConditions() {
+        ResourceConditions.register(PackModeCondition.id, PackModeCondition::test);
     }
 }
