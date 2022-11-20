@@ -6,4 +6,5 @@ public interface PlatformHelper {
     boolean isModLoaded(String name);
     boolean isProduction();
     void publishEvent(String newPackMode);
+    void setupJsonConditions();
 }

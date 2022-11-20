@@ -1,12 +1,9 @@
 package com.teamacronymcoders.packmode;
 
-import com.teamacronymcoders.packmode.PackModeAPIImpl;
-import com.teamacronymcoders.packmode.PackModeCommand;
-import com.teamacronymcoders.packmode.PackModeConstants;
 import com.teamacronymcoders.packmode.api.PackModeAPI;
 import com.teamacronymcoders.packmode.compat.CompatHandler;
-import com.teamacronymcoders.packmode.condition.minecraft.MinecraftCompat;
-import com.teamacronymcoders.packmode.condition.minecraft.condition.PackModeCondition;
+import com.teamacronymcoders.packmode.compat.minecraft.MinecraftCompat;
+import com.teamacronymcoders.packmode.condition.minecraft.ForgePackModeCondition;
 import com.teamacronymcoders.packmode.platform.ForgeConfigHelper;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -18,7 +15,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -54,7 +50,7 @@ public class PackMode {
                 @Override
                 protected void buildCraftingRecipes(Consumer<FinishedRecipe> p_176532_) {
                     ConditionalRecipe.builder()
-                            .addCondition(new PackModeCondition(List.of("expert")))
+                            .addCondition(new ForgePackModeCondition(List.of("expert")))
                             .addRecipe(
                                     ShapedRecipeBuilder.shaped(Items.TNT)
                                             .pattern("LLL")
