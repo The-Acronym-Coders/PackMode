@@ -42,7 +42,7 @@ minecraft {
         }
 
         server {
-            workingDirectory project.file('run')
+            workingDirectory project.file('runServer')
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Server'
             property 'mixin.env.remapRefMap', 'true'
@@ -91,7 +91,7 @@ dependencies {
     compileOnly project(":Common")
     implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.113")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 }
 
 tasks.withType(JavaCompile) {
@@ -102,7 +102,8 @@ tasks.withType(JavaCompile) {
 //Run datagen and uncomment + build to test Forge Recipe Conditions
 //sourceSets.main.resources.srcDir 'src/generated/resources'
 
-//You'll have to change MinecraftCompat to work with an EBS as FMLCommonSetup does NOT fire during datagen!
+//You'll have to the main Forge class to run it's setup code in the mod constructor and not in the FMLCommonSetup event,
+//as that doesn't fire during datagen.
 
 processResources {
     from project(":Common").sourceSets.main.resources
