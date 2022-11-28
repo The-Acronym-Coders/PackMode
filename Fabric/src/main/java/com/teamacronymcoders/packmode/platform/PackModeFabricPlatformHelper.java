@@ -9,8 +9,12 @@ import net.fabricmc.loader.api.FabricLoader;
 public class PackModeFabricPlatformHelper implements PlatformHelper {
 
     //Empty consumer as our Event is purely informative.
-    public static final Event<DummyInterface<PackModeChangedEvent>> PACK_MODE_CHANGED_EVENT =
-            EventFactory.createArrayBacked(DummyInterface.class, listeners -> packModeChangedEvent -> {});
+    public static final Event<PackModeChanged> PACK_MODE_CHANGED_EVENT =
+            EventFactory.createArrayBacked(PackModeChanged.class, listeners -> newPackModeValue -> {
+                for (PackModeChanged eventListener : listeners) {
+                    eventListener.handle(newPackModeValue);
+                }
+            });
 
     @Override
     public String getModLoader() {
@@ -29,14 +33,13 @@ public class PackModeFabricPlatformHelper implements PlatformHelper {
 
     @Override
     public void publishEvent(String newPackMode) {
-        PackModeChangedEvent event = new PackModeChangedEvent(newPackMode);
         if (isModLoaded("fabric")) {
-            PACK_MODE_CHANGED_EVENT.invoker().handle(event);
+            PACK_MODE_CHANGED_EVENT.invoker().handle(newPackMode);
         }
     }
 
-    private interface DummyInterface<U> {
-        void handle(U u);
+    public interface PackModeChanged {
+        void handle(String newPackMode);
     }
 
     @Override
