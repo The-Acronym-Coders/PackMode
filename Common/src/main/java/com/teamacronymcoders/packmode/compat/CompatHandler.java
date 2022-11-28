@@ -20,8 +20,7 @@ public class CompatHandler {
                 .filter(entry -> PackModeServices.PLATFORM.isModLoaded(entry.getKey()))
                 .map(Entry::getValue)
                 .map(CompatHandler::loadCompat)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
+                .filter(Objects::nonNull).toList());
     }
 
 
