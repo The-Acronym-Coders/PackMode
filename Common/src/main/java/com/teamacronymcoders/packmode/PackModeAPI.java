@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class PackModeAPI {
+
+    //Should this be thread safe now that the api is resolved before FMLSetupCommonEvent on Forge?
+
     private static PackModeAPI instance;
 
     public static PackModeAPI getInstance() {
