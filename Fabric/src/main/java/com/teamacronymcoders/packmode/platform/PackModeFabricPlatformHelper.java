@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.fabricmc.loader.api.FabricLoader;
 
-public class FabricPlatformHelper implements PlatformHelper {
+public class PackModeFabricPlatformHelper implements PlatformHelper {
 
     //Empty consumer as our Event is purely informative.
     public static final Event<DummyInterface<PackModeChangedEvent>> PACK_MODE_CHANGED_EVENT =

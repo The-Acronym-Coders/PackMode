@@ -5,7 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.List;
 
-public class ForgeConfigHelper implements ConfigHelper {
+public class PackModeForgeConfigHelper implements ConfigHelper {
 
     public static ForgeConfigSpec.ConfigValue<String> packMode;
     public static ForgeConfigSpec.ConfigValue<List<String>> validPackModes;
@@ -24,7 +24,7 @@ public class ForgeConfigHelper implements ConfigHelper {
 
     @Override
     public void setPackMode(String packMode) {
-        ForgeConfigHelper.packMode.set(packMode);
+        PackModeForgeConfigHelper.packMode.set(packMode);
     }
 
     @Override

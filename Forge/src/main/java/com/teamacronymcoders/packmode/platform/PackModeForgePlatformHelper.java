@@ -7,7 +7,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-public class ForgePlatformHelper implements PlatformHelper {
+public class PackModeForgePlatformHelper implements PlatformHelper {
     @Override
     public String getModLoader() {
         return "Forge";

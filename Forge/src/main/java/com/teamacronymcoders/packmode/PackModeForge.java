@@ -4,7 +4,7 @@ import com.teamacronymcoders.packmode.api.PackModeAPI;
 import com.teamacronymcoders.packmode.compat.CompatHandler;
 import com.teamacronymcoders.packmode.compat.minecraft.MinecraftCompat;
 import com.teamacronymcoders.packmode.condition.minecraft.ForgePackModeCondition;
-import com.teamacronymcoders.packmode.platform.ForgeConfigHelper;
+import com.teamacronymcoders.packmode.platform.PackModeForgeConfigHelper;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -27,13 +27,13 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @Mod(value = PackModeConstants.MODID)
-public class PackMode {
+public class PackModeForge {
 
-    public PackMode() {
+    public PackModeForge() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherDataEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ForgeConfigHelper.makeConfig(new ForgeConfigSpec.Builder()));
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PackModeForgeConfigHelper.makeConfig(new ForgeConfigSpec.Builder()));
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

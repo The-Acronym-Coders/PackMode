@@ -7,7 +7,7 @@ import net.minecraft.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FabricConfigHelper extends MidnightConfig implements ConfigHelper {
+public class PackModeFabricConfigHelper extends MidnightConfig implements ConfigHelper {
 
     @Comment
     public static Comment title;
@@ -37,7 +37,7 @@ public class FabricConfigHelper extends MidnightConfig implements ConfigHelper {
 
     @Override
     public void setPackMode(String packMode) {
-        FabricConfigHelper.packMode = packMode;
+        PackModeFabricConfigHelper.packMode = packMode;
         write(PackModeConstants.MODID);
     }
 
