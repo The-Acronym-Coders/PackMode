@@ -1,4 +1,4 @@
-package com.teamacronymcoders.packmode.api;
+package com.teamacronymcoders.packmode;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,5 +30,5 @@ public abstract class PackModeAPI {
         return packModes.stream().anyMatch(this.getPackMode()::equalsIgnoreCase);
     }
 
-    public abstract void setPackMode(String packMode);
+    abstract void setPackMode(String packMode);
 }
