@@ -6,8 +6,8 @@ import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.zencode.IPreprocessor;
 import com.blamejared.crafttweaker.api.zencode.scriptrun.IMutableScriptRunInfo;
 import com.blamejared.crafttweaker.api.zencode.scriptrun.IScriptFile;
+import com.teamacronymcoders.packmode.PackModeAPI;
 import com.teamacronymcoders.packmode.PackModeConstants;
-import com.teamacronymcoders.packmode.api.PackModeAPI;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
