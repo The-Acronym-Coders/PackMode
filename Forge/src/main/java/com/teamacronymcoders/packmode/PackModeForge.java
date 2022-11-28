@@ -1,6 +1,7 @@
 package com.teamacronymcoders.packmode;
 
-import com.teamacronymcoders.packmode.api.PackModeAPI;
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
 import com.teamacronymcoders.packmode.compat.CompatHandler;
 import com.teamacronymcoders.packmode.compat.minecraft.MinecraftCompat;
 import com.teamacronymcoders.packmode.condition.minecraft.ForgePackModeCondition;
@@ -14,12 +15,10 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.List;
@@ -29,13 +28,19 @@ import java.util.function.Consumer;
 public class PackModeForge {
 
     public PackModeForge() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherDataEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PackModeForgeConfigHelper.makeConfig(new ForgeConfigSpec.Builder()));
-    }
+        ForgeConfigSpec spec = PackModeForgeConfigHelper.makeConfig(new ForgeConfigSpec.Builder());
 
-    private void commonSetup(FMLCommonSetupEvent event) {
+
+        //Load the Config Earlier through NightConfig to resolve it as earlier as possible
+        final CommentedFileConfig file = CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve("packmode-common.toml")).sync().autosave().writingMode(WritingMode.REPLACE).build();
+        file.load();
+        spec.setConfig(file);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, spec);
+
+        //Setup PackMode
         PackModeAPI.setInstance(new PackModeAPIImpl());
         CompatHandler.registerCompat("minecraft", MinecraftCompat.class);
         CompatHandler.tryActivate();
