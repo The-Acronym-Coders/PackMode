@@ -25,6 +25,7 @@ public class PackModeForgeConfigHelper implements ConfigHelper {
     @Override
     public void setPackMode(String packMode) {
         PackModeForgeConfigHelper.packMode.set(packMode);
+        PackModeForgeConfigHelper.packMode.save();
     }
 
     @Override
