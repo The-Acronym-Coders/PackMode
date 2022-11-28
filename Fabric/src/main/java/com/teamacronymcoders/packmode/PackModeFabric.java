@@ -1,6 +1,5 @@
 package com.teamacronymcoders.packmode;
 
-import com.teamacronymcoders.packmode.api.PackModeAPI;
 import com.teamacronymcoders.packmode.compat.CompatHandler;
 import com.teamacronymcoders.packmode.compat.minecraft.MinecraftCompat;
 import com.teamacronymcoders.packmode.platform.PackModeFabricConfigHelper;

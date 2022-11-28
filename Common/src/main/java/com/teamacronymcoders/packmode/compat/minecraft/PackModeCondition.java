@@ -3,8 +3,8 @@ package com.teamacronymcoders.packmode.compat.minecraft;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.teamacronymcoders.packmode.PackModeAPI;
 import com.teamacronymcoders.packmode.PackModeConstants;
-import com.teamacronymcoders.packmode.api.PackModeAPI;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
