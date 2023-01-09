@@ -1,6 +1,6 @@
 {
   "packmode.midnightconfig.title" : "PackMode Config",
-  "packmode.midnightconfig.packMode" : "Chenge the Current Packmode",
+  "packmode.midnightconfig.packMode" : "Change the Current Packmode",
   "packmode.midnightconfig.currentPackMode" : "Only change this if you know what you are doing.",
   "packmode.midnightconfig.packModes" : "List of possible Packmodes",
   "packmode.midnightconfig.possiblePackModes" : "Click on the number and insert or remove text to add / remove packmodes.",
