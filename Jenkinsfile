@@ -20,7 +20,7 @@ pipeline {
                     if (env.BRANCH_NAME.contains("develop")) {
                         sh './gradlew build -Pbranch=SNAPSHOT uploadArchives'
                     } else if (env.BRANCH_NAME.contains("release")) {
-                        sh './gradlew build uploadArchives'
+                        sh './gradlew build publish'
                     } else {
                         sh './gradlew build -Pbranch=' + env.BRANCH_NAME + ' uploadArchives'
                     }
