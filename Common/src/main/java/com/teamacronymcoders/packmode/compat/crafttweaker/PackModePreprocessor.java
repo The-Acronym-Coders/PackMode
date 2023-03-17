@@ -8,13 +8,18 @@ import com.blamejared.crafttweaker.api.zencode.scriptrun.IScriptFile;
 import com.teamacronymcoders.packmode.api.PackModeAPI;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Preprocessor
 @ZenRegister
 public class PackModePreprocessor implements IPreprocessor {
 
     public static final PackModePreprocessor INSTANCE = new PackModePreprocessor();
+
+    private static final String SPACE = Pattern.quote(" ");
 
     @Override
     public String name() {
@@ -29,6 +34,6 @@ public class PackModePreprocessor implements IPreprocessor {
 
     @Override
     public boolean apply(IScriptFile file, List<String> preprocessedContents, IMutableScriptRunInfo runInfo, List<Match> matches) {
-        return matches.stream().map(Match::content).anyMatch(PackModeAPI.getInstance().getPackMode()::equalsIgnoreCase);
+        return matches.stream().map(Match::content).map(it -> it.split(SPACE)).flatMap(Arrays::stream).anyMatch(PackModeAPI.getInstance().getPackMode()::equalsIgnoreCase);
     }
 }

@@ -32,7 +32,8 @@ public abstract class PackModeCondition {
             PackModeConstants.LOGGER.error("Unable to find \"value\" key in packmode JSON Condition: " + json);
             return false;
         }
-
+        PackModeConstants.LOGGER.info("Found json object!");
+        PackModeConstants.LOGGER.info(json.toString());
         JsonElement packModes = value.getAsJsonObject().get("packModes");
         if (packModes == null) {
             PackModeConstants.LOGGER.warn("JsonObject: " + json + " has an empty packmode condition! This is the same as not including the condition at all.");
@@ -46,7 +47,7 @@ public abstract class PackModeCondition {
             List<String> packModeList = new ArrayList<>();
             JsonArray jsonArray = packModes.getAsJsonArray();
             for (int i = 0; i < jsonArray.size(); ++i) {
-                packModeList.add(jsonArray.get(i).getAsString());
+                packModeList.add(jsonArray.get(i).getAsString().toLowerCase(Locale.ROOT));
             }
             return PackModeAPI.getInstance().includesPackMode(packModeList);
         }

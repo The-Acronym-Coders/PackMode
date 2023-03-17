@@ -1,3 +1,0 @@
-#packmode normal
-
-println("Normal");
