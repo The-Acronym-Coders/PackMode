@@ -14,14 +14,13 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -46,7 +45,7 @@ public class PackMode {
     private void gatherDataEvent(final GatherDataEvent event) {
 
         if (event.includeServer() && event.includeDev()) {
-            event.getGenerator().addProvider(new RecipeProvider(event.getGenerator()) {
+            event.getGenerator().addProvider(true, new RecipeProvider(event.getGenerator()) {
                 @Override
                 protected void buildCraftingRecipes(Consumer<FinishedRecipe> p_176532_) {
                     ConditionalRecipe.builder()

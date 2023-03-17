@@ -11,4 +11,8 @@ public class ForgePackModeCondition extends PackModeCondition implements ICondit
         super(validPackModes);
     }
 
+    @Override
+    public boolean test(IContext context){
+        return test();
+    }
 }

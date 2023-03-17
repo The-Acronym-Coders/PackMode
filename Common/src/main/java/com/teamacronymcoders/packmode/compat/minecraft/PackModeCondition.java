@@ -20,6 +20,7 @@ public abstract class PackModeCondition {
         this.validPackModes = validPackModes;
     }
 
+    //On forge, this is a method to @Override
     public ResourceLocation getID() {
         return id;
     }

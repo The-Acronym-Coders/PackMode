@@ -81,7 +81,7 @@ dependencies {
     compileOnly project(":Common")
     implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.113")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 }
 
 tasks.withType(JavaCompile) {
@@ -114,7 +114,8 @@ task publishToCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForg
 
     //mainFile.addRequirement('fabric-api') //Fabric API slug
     //mainFile.addEmbedded('cloth-config') //Cloth Config slug
-    mainFile.changelog = "Updated to 1.18.2 Forge!"
+    mainFile.addOptional('crafttweaker')
+    mainFile.changelog = "Updated to 1.19.2 Forge!" //Don't forget to double check the changelog.
 }
 
 tasks.publishToCurseForge.dependsOn(tasks.build)
