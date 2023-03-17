@@ -1,18 +1,8 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7.+'
-    }
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'net.darkhax.curseforgegradle' version '1.0.11'
 }
-apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
 
 archivesBaseName = "${mod_name}-Forge-${minecraft_version}"
 
@@ -111,3 +101,21 @@ processResources {
 
 jar.finalizedBy('reobfJar')
 
+
+task publishToCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = project.findProperty("curseforge.upload.api.token") ?: "invalid/no CurseForge API token found!"
+
+    def mainFile = upload(curseforge_project_id, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
+
+    mainFile.displayName = "${archivesBaseName}-${version}"
+    mainFile.releaseType = curseforge_release_type_forge
+    mainFile.addModLoader(curseforge_mod_loader_forge)
+    mainFile.addGameVersion(minecraft_version)
+    mainFile.addJavaVersion(curseforge_java_version)
+
+    //mainFile.addRequirement('fabric-api') //Fabric API slug
+    //mainFile.addEmbedded('cloth-config') //Cloth Config slug
+    mainFile.changelog = "Updated to 1.18.2 Forge!"
+}
+
+tasks.publishToCurseForge.dependsOn(tasks.build)
