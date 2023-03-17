@@ -1,6 +1,7 @@
 subprojects {
     
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
     
     java.toolchain.languageVersion = JavaLanguageVersion.of(17)
     java.withSourcesJar()
