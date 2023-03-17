@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'idea'
+    id 'net.darkhax.curseforgegradle' version '1.0.11'
 }
 
 archivesBaseName = "${mod_name}-Fabric-${minecraft_version}"
@@ -67,5 +68,26 @@ processResources {
 tasks.withType(JavaCompile) {
     source(project(":Common").sourceSets.main.allSource)
 }
+
+
+task publishToCurseForge(type:  net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = project.findProperty("curseforge.upload.api.token") ?: "invalid/no CurseForge API token found!"
+
+    def mainFile = upload(curseforge_project_id, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
+
+    mainFile.displayName = "${archivesBaseName}-${version}"
+    mainFile.releaseType = curseforge_release_type_forge
+    mainFile.addModLoader(curseforge_mod_loader_fabric)
+    mainFile.addGameVersion(minecraft_version)
+    mainFile.addJavaVersion(curseforge_java_version)
+
+    //mainFile.addRequirement('fabric-api') //Fabric API slug
+    //mainFile.addEmbedded('cloth-config') //Cloth Config slug
+    mainFile.changelog = "Updated to 1.18.2 Forge!"
+}
+
+tasks.publishToCurseForge.dependsOn(tasks.build)
+
+
 
 
