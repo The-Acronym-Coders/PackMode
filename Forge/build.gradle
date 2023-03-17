@@ -101,7 +101,6 @@ processResources {
 
 jar.finalizedBy('reobfJar')
 
-
 task publishToCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     apiToken = project.findProperty("curseforge.upload.api.token") ?: "invalid/no CurseForge API token found!"
 

@@ -76,14 +76,14 @@ task publishToCurseForge(type:  net.darkhax.curseforgegradle.TaskPublishCurseFor
     def mainFile = upload(curseforge_project_id, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
 
     mainFile.displayName = "${archivesBaseName}-${version}"
-    mainFile.releaseType = curseforge_release_type_forge
+    mainFile.releaseType = curseforge_release_type_fabric
     mainFile.addModLoader(curseforge_mod_loader_fabric)
     mainFile.addGameVersion(minecraft_version)
     mainFile.addJavaVersion(curseforge_java_version)
 
     //mainFile.addRequirement('fabric-api') //Fabric API slug
     //mainFile.addEmbedded('cloth-config') //Cloth Config slug
-    mainFile.changelog = "Updated to 1.18.2 Forge!"
+    mainFile.changelog = "Updated to 1.18.2 Fabric!"
 }
 
 tasks.publishToCurseForge.dependsOn(tasks.build)
