@@ -2,30 +2,32 @@
     "schemaVersion": 1,
     "id": "packmode",
     "version": "${version}",
-    "name": "Pack Mode",
-    "description": "Allows Pack Makers to provide different combinations of pack modes",
+    "name": "${mod_name}",
+    "description": "${description}",
     "authors": [
-      "SkySom"
+        "${mod_author}"
     ],
     "contact": {
-      "sources": "https://github.com/The-Acronym-Coders/PackMode"
+        "homepage": "https://github.com/The-Acronym-Coders/PackMode",
+        "issues": "${issues_url}",
+        "sources": "https://github.com/The-Acronym-Coders/PackMode"
     },
+    "license": "${license}",
     "icon": "assets/packmode/logo.png",
-    "license": "MIT",
     "environment": "*",
     "entrypoints": {
-      "main": [
-        "com.teamacronymcoders.packmode.PackModeFabric"
-      ]
+        "main": [
+            "com.teamacronymcoders.packmode.PackModeFabric"
+        ]
     },
-    "mixins": [
-      "packmode.mixins.json"
-    ],
     "depends": {
-      "fabricloader": ">=0.14.7",
-      "minecraft": "1.19.2",
-      "java": ">=17",
-      "fabric" : "*"
+        "fabricloader": ">=0.14",
+        "fabric": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=17"
+    },
+    "suggests": {
+        "another-mod": "crafttweaker"
     }
-  }
+}
   

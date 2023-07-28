@@ -17,13 +17,7 @@ pipeline {
             steps {
                 echo 'Building and Deploying to Maven'
                 script {
-                    if (env.BRANCH_NAME.contains("develop")) {
-                        sh './gradlew build -Pbranch=SNAPSHOT publish'
-                    } else if (env.BRANCH_NAME.contains("release")) {
-                        sh './gradlew build publish'
-                    } else {
-                        sh './gradlew build -Pbranch=' + env.BRANCH_NAME + ' publish'
-                    }
+                    sh './gradlew build publish'
                 }
             }
         }

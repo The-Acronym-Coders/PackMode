@@ -6,6 +6,7 @@ import com.teamacronymcoders.packmode.compat.minecraft.MinecraftCompat;
 import com.teamacronymcoders.packmode.condition.minecraft.ForgePackModeCondition;
 import com.teamacronymcoders.packmode.platform.ForgeConfigHelper;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -29,13 +30,10 @@ import java.util.function.Consumer;
 public class PackMode {
 
     public PackMode() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherDataEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ForgeConfigHelper.makeConfig(new ForgeConfigSpec.Builder()));
-    }
 
-    private void commonSetup(FMLCommonSetupEvent event) {
         PackModeAPI.setInstance(new PackModeAPIImpl());
         CompatHandler.registerCompat("minecraft", MinecraftCompat.class.getName());
         CompatHandler.tryActivate();
@@ -45,13 +43,13 @@ public class PackMode {
     private void gatherDataEvent(final GatherDataEvent event) {
 
         if (event.includeServer() && event.includeDev()) {
-            event.getGenerator().addProvider(true, new RecipeProvider(event.getGenerator()) {
+            event.getGenerator().addProvider(true, new RecipeProvider(event.getGenerator().getPackOutput()) {
                 @Override
-                protected void buildCraftingRecipes(Consumer<FinishedRecipe> p_176532_) {
+                protected void buildRecipes(Consumer<FinishedRecipe> finishedRecipeConsumer) {
                     ConditionalRecipe.builder()
                             .addCondition(new ForgePackModeCondition(List.of("expert")))
                             .addRecipe(
-                                    ShapedRecipeBuilder.shaped(Items.TNT)
+                                    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TNT)
                                             .pattern("LLL")
                                             .pattern("LBL")
                                             .pattern("LGL")
@@ -59,7 +57,7 @@ public class PackMode {
                                             .define('B', Items.BREAD)
                                             .define('G', Items.GLOWSTONE_DUST)
                                             .unlockedBy("has_stone", has(Items.BREAD))
-                                            ::save).build(p_176532_, new ResourceLocation("packmode", "test_recipe"));
+                                            ::save).build(finishedRecipeConsumer, new ResourceLocation("packmode", "test_recipe"));
                 }
             });
 
