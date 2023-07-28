@@ -15,11 +15,19 @@ pipeline {
         }
         stage('Build and Deploy') {
             steps {
-                echo 'Building and Deploying to Maven'
+                echo 'Building'
                 script {
-                    sh './gradlew build publish'
+                    sh './gradlew build'
                 }
             }
+        }
+        stage('Upload to maven') {
+        steps {
+              echo 'Publishing'
+              script {
+                   sh './gradlew publish'
+              }
+           }
         }
     }
     post {
