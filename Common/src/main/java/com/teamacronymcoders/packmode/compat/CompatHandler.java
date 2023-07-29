@@ -21,7 +21,7 @@ public class CompatHandler {
                 .map(Entry::getValue)
                 .map(CompatHandler::loadCompat)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
 

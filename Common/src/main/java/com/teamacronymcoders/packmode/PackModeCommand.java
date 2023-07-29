@@ -65,6 +65,6 @@ public class PackModeCommand {
     }
 
     private static void sendFeedback(CommandContext<CommandSourceStack> context, Component component) {
-        context.getSource().sendSuccess(component, true);
+        context.getSource().sendSuccess(() -> component, true);
     }
 }

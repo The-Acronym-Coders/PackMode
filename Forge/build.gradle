@@ -104,12 +104,11 @@ task publishToCurseForge(type:  net.darkhax.curseforgegradle.TaskPublishCurseFor
     mainFile.displayName = "${archivesBaseName}-${version}"
     mainFile.releaseType = curseforge_release_type_forge
     mainFile.addModLoader(curseforge_mod_loader_forge)
-    mainFile.addGameVersion("1.19.3")
-    mainFile.addGameVersion("1.19.4")
+    mainFile.addGameVersion("1.20.1")
     mainFile.addJavaVersion(curseforge_java_version)
 
     mainFile.addOptional('crafttweaker')
-    mainFile.changelog = "Updated to 1.19.3 Forge!" //Don't forget to double check the changelog.
+    mainFile.changelog = curseforge_forge_changelog //Don't forget to double check the changelog.
 }
 
 tasks.publishToCurseForge.dependsOn(tasks.build)
