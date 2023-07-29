@@ -32,7 +32,9 @@ pipeline {
     }
     post {
         always {
-            archive 'build/libs/**.jar'
+            archiveArtifacts 'Common/build/libs/**.jar'
+            archiveArtifacts 'Fabric/build/libs/**.jar'
+            archiveArtifacts 'Forge/build/libs/**.jar'
         }
     }
 }
